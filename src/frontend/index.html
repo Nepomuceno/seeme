@@ -5,14 +5,20 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="azure-storage.blob.js"></script>
+    <link href="style.css" rel='stylesheet' />
+    <link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <div id="app">
         <h1>See Me</h1>
         <div>
-            <input type="file" @change="sendBlob" capture="environment" accept="image/*" id="cameraInput" name="cameraInput" />
-            <input type="file" accept="image/*;capture=camera" />
+            <p class="file">
+                <input type="file" @change="sendBlob" capture="environment" accept="image/*;capture=camera" id="cameraInput"
+                    name="cameraInput" />
+                    
+                <label class="ui-btn ui-corner-all ui-icon-camera ui-btn-icon-notext" for="cameraInput"></label>
+            </p>
         </div>
         <div>
             <ul>
@@ -39,13 +45,13 @@
             },
             methods: {
                 fechBlobs: () => {
-                    this.app.blobService.listBlobsSegmented('seeme',null, function (error, results) {
+                    this.app.blobService.listBlobsSegmented('seeme', null, function (error, results) {
                         if (error) {
                             console.log(error);
                         } else {
                             for (var i = 0, blob; blob = results.entries[i]; i++) {
-                                if(!this.app.$data.cache[blob.name]){
-                                    this.app.$data.images.unshift({ url: `http://127.0.0.1:10000/devstoreaccount1/seeme/${blob.name}`, alt:`${blob.name}` })
+                                if (!this.app.$data.cache[blob.name]) {
+                                    this.app.$data.images.unshift({ url: `http://127.0.0.1:10000/devstoreaccount1/seeme/${blob.name}`, alt: `${blob.name}` })
                                     this.app.$data.cache[blob.name] = true;
                                     console.log(this.app.$data.cache);
                                 }
@@ -67,7 +73,7 @@
                     this.app.rawBlobService.singleBlobPutThresholdInBytes = customBlockSize;
 
                     var finishedOrError = false;
-                    var speedSummary = this.app.rawBlobService.createBlockBlobFromBrowserFile('rawfiles', file.name, file, {blockSize : customBlockSize}, function(error, result, response) {
+                    var speedSummary = this.app.rawBlobService.createBlockBlobFromBrowserFile('rawfiles', file.name, file, { blockSize: customBlockSize }, function (error, result, response) {
                         finishedOrError = true;
                         if (error) {
                             // Upload blob failed

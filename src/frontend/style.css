@@ -1,0 +1,107 @@
+.file {
+  position: relative;
+}
+.file label {
+    height: 50px !important;
+    width: 50px !important;
+  background-color: #bbb;
+  display: inline-block;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: all 0.4s;
+}
+.file input {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 0;
+  opacity: 0.01;
+  cursor: pointer;
+}
+.file input:hover + label,
+.file input:focus + label {
+  background: #34495e;
+  color: #39d2b4;
+}
+.camera:hover {
+    cursor: pointer;
+}
+.camera {
+  background-image: radial-gradient(
+    circle,
+    transparent 25%,
+    #fff 25%,
+    #fff 35%,
+    transparent 35%,
+    transparent 45%,
+    #fff 45%
+  );
+  border-radius: 0.25em;
+  display: inline-block;
+  height: 2em;
+  left: 50%;
+  top: 30%;
+  width: 3em;
+  -webkit-filter: drop-shadow(0 2px 3px hsla(0, 0%, 0%, 0.25));
+}
+.camera:after {
+  border: 0.25em solid #fff;
+  border-bottom: none;
+  border-radius: 0.25em 0.25em 0 0;
+  content: "";
+  height: 0.25em;
+  left: 0.875em;
+  /*top: -0.2em;*/
+  width: 0.75em;
+}
+.camera:before {
+  background-color: #fff;
+  content: "";
+  height: 0.25em;
+  left: 0.25em;
+  top: -0.25em;
+  width: 0.5em;
+}
+​
+  
+  
+  /* Useless styles, just for demo styles */
+  
+  body {
+  font-family: "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
+  color: #7f8c9a;
+  background: #fcfdfd;
+}
+h1,
+h2 {
+  margin-bottom: 5px;
+  font-weight: normal;
+  text-align: center;
+  color: #aaa;
+}
+h2 {
+  margin: 5px 0 2em;
+  color: #1abc9c;
+}
+form {
+  width: 225px;
+  margin: 0 auto;
+  text-align: center;
+}
+h2 + p {
+  text-align: center;
+}
+.txtcenter {
+  margin-top: 4em;
+  font-size: 0.9em;
+  text-align: center;
+  color: #aaa;
+}
+.copy {
+  margin-top: 2em;
+}
+.copy a {
+  text-decoration: none;
+  color: #1abc9c;
+}

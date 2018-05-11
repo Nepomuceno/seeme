@@ -1,10 +1,8 @@
 package com.azuredemo.functions;
 
-import java.io.Console;
 import java.util.*;
 import com.microsoft.azure.serverless.functions.annotation.*;
 import com.microsoft.azure.serverless.functions.*;
-import com.microsoft.azure.serverless.*;
 
 /**
  * Azure Functions with HTTP Trigger.
@@ -36,11 +34,11 @@ public class Function {
     @FunctionName("upload")
     @StorageAccount("AzureWebJobsStorage")
     @BlobOutput(name = "$return", path = "seeme/{name}")
-    public byte[] upload(
-        @BlobTrigger(name = "blob", path = "rawfiles/{name}") byte[] content,
+    public String upload(
+        @BlobTrigger(name = "blob", path = "rawfiles/{name}") String content,
         final ExecutionContext context) {
         context.getLogger().info("gotMessagea");
-        context.getLogger().info("content:" + content.length);
+        context.getLogger().info("content:" + content.length());
         return content;
     }
 }
