@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>See Me</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="azure-storage.blob.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>See Me</h1>
+        <div>
+            <input type="file" @change="sendBlob" capture="environment" accept="image/*" id="cameraInput" name="cameraInput" />
+            <input type="file" accept="image/*;capture=camera" />
+        </div>
+        <div>
+            <ul>
+                <li v-for="image in images">
+                    <img :id="image.alt" :src="image.url" :alt="image.alt">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                images: [],
+                cache: {
+
+                }
+            },
+            created: function () {
+                this.timer = setInterval(this.fechBlobs, 3000)
+                var blobUri = 'https://seeme.blob.core.windows.net/';
+                this.blobService = AzureStorage.Blob.createBlobServiceWithSas(blobUri, '?st=2018-05-11T05%3A54%3A19Z&se=2020-05-12T05%3A54%3A00Z&sp=rl&sv=2017-07-29&sr=c&sig=TrrBrvpsXVdY1NAXgjr89%2FaC72CGCwYpOTCkGiSkT3k%3D');
+                this.rawBlobService = AzureStorage.Blob.createBlobServiceWithSas(blobUri, '?st=2018-05-11T05%3A55%3A26Z&se=2020-05-12T05%3A55%3A00Z&sp=w&sv=2017-07-29&sr=c&sig=gfFACaHgRrmlHpkkNE13kTrPsxvsdTVgJ2dGimiKjNY%3D');
+            },
+            methods: {
+                fechBlobs: () => {
+                    this.app.blobService.listBlobsSegmented('seeme',null, function (error, results) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            for (var i = 0, blob; blob = results.entries[i]; i++) {
+                                if(!this.app.$data.cache[blob.name]){
+                                    this.app.$data.images.unshift({ url: `http://127.0.0.1:10000/devstoreaccount1/seeme/${blob.name}`, alt:`${blob.name}` })
+                                    this.app.$data.cache[blob.name] = true;
+                                    console.log(this.app.$data.cache);
+                                }
+                            }
+                        }
+                    });
+                    /*axios.get('http://localhost:7071/api/amazing?name=Gabriel').then((data) => {
+                        var a = `http://placebacon.net/${Math.floor((Math.random() * 200) + 200)}/300`;
+                    }).catch((err) => console.log(err));*/
+
+                },
+                sendBlob: () => {
+                    console.log(this);
+                    console.log('Sending file');
+                    // If one file has been selected in the HTML file input element
+                    var file = document.getElementById('cameraInput').files[0];
+
+                    var customBlockSize = file.size > 1024 * 1024 * 32 ? 1024 * 1024 * 4 : 1024 * 512;
+                    this.app.rawBlobService.singleBlobPutThresholdInBytes = customBlockSize;
+
+                    var finishedOrError = false;
+                    var speedSummary = this.app.rawBlobService.createBlockBlobFromBrowserFile('rawfiles', file.name, file, {blockSize : customBlockSize}, function(error, result, response) {
+                        finishedOrError = true;
+                        if (error) {
+                            // Upload blob failed
+                        } else {
+                            // Upload successfully
+                        }
+                    });
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

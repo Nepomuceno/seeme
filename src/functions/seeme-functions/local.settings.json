@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=seeme;AccountKey=5+O2m1YRFXfJb9x1fVlRZQ0weV2C9oodb7rMmE36Rw/KOXPM7XoCQ+SA4e75E3G0rF9Wd05RF7Pp8tetCeZcoQ==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsDashboard": "DefaultEndpointsProtocol=https;AccountName=seeme;AccountKey=5+O2m1YRFXfJb9x1fVlRZQ0weV2C9oodb7rMmE36Rw/KOXPM7XoCQ+SA4e75E3G0rF9Wd05RF7Pp8tetCeZcoQ==;EndpointSuffix=core.windows.net"
+  },
+  "Host": {
+    "CORS": "*"
+  }
+}
