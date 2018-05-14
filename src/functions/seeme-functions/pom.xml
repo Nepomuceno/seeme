@@ -71,6 +71,22 @@
                             <name>FUNCTIONS_EXTENSION_VERSION</name>
                             <value>beta</value>
                         </property>
+                        <property>
+                            <name>
+                                AzureWebJobsStorage
+                            </name>
+                            <value>
+                                DefaultEndpointsProtocol=https;AccountName=seeme;AccountKey=5+O2m1YRFXfJb9x1fVlRZQ0weV2C9oodb7rMmE36Rw/KOXPM7XoCQ+SA4e75E3G0rF9Wd05RF7Pp8tetCeZcoQ==;EndpointSuffix=core.windows.net
+                            </value>
+                        </property>
+                        <property>
+                            <name>
+                                AzureWebJobsDashboard
+                            </name>
+                            <value>
+                                DefaultEndpointsProtocol=https;AccountName=seeme;AccountKey=5+O2m1YRFXfJb9x1fVlRZQ0weV2C9oodb7rMmE36Rw/KOXPM7XoCQ+SA4e75E3G0rF9Wd05RF7Pp8tetCeZcoQ==;EndpointSuffix=core.windows.net
+                            </value>
+                        </property>
                     </appSettings>
                 </configuration>
                 <executions>

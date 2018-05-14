@@ -33,12 +33,13 @@ public class Function {
 
     @FunctionName("upload")
     @StorageAccount("AzureWebJobsStorage")
-    @BlobOutput(name = "$return", path = "seeme/{name}")
-    public String upload(
-        @BlobTrigger(name = "blob", path = "rawfiles/{name}") String content,
+    @BlobOutput(name = "$return",dataType="binary", path = "seeme/{name}")
+    public byte[] upload(
+        @BlobTrigger(name = "blob", dataType="binary", path = "rawfiles/{name}") 
+        byte[] content,
         final ExecutionContext context) {
         context.getLogger().info("gotMessagea");
-        context.getLogger().info("content:" + content.length());
+        context.getLogger().info("content:" + content.length);
         return content;
     }
 }
